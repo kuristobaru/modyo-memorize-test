@@ -1,13 +1,22 @@
-import { useState } from 'react'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <div className='App'>
-      <div class=''>Memorize Modyo</div>
-      <div></div>
+      <div className='container mx-auto bg-cover'>
+        <div className='grid grid-rows-3'>
+          <div className="text-6xl font-bold text-white text-center animate-pulse mt-20">
+            Memorize Modyo
+          </div>
+          <button className="text-4xl font-bold text-white text-center animate-pulse mt-8">
+            Play!
+          </button>
+          <button className="text-4xl font-bold text-white text-center animate-pulse">
+            Difficulty
+          </button>
+        </div>
+      </div>
     </div>
   )
 }
