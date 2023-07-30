@@ -10,10 +10,14 @@ function App() {
     
   }, []);
 
+  const handleBack = () => {
+    setIsInGame(false)
+  }
+
   return (
     <div className='App'>
       {isInGame ?
-        <Memorize difficulty={difficulty}/>
+        <Memorize difficulty={difficulty} handleBack={() => handleBack()}/>
         :
         <div className='container mx-auto bg-cover'>
           <div className='grid grid-rows-5'>
@@ -33,7 +37,7 @@ function App() {
                 font-bold
                 bg-transparent
                 animate-pulse
-                hover:bg-violet-700 transition ease-in-out duration-500
+                hover:bg-violet-700 transition ease-in-out duration-300
                 text-white 
                 text-center 
                 border-2 
