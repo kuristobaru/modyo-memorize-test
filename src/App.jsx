@@ -3,12 +3,25 @@ import './App.css'
 import Memorize from './components/Memorize/Memorize';
 
 function App() {
-  const [difficulty, setDifficulty] = useState('medium');
+  const [difficulty, setDifficulty] = useState(null);
   const [isInGame, setIsInGame] = useState(false);
+  const [images, setImages] = useState([]);
 
   useEffect(() => {
-    
-  }, []);
+    const promise = fetch("https://fed-team.modyo.cloud/api/content/spaces/animals/types/game/entries?per_page=20")
+        promise.then(response => {
+            return response.json()
+        })
+        .then(data => {
+          if(difficulty === 'easy'){
+            setImages(data.entries.splice(0,10).map(item => item.fields.image.url))
+          }else if (difficulty === 'medium'){
+            setImages(data.entries.splice(0,15).map(item => item.fields.image.url))
+          }else{
+            setImages(data.entries.map(item => item.fields.image.url))
+          }
+        })
+  }, [difficulty]);
 
   const handleBack = () => {
     setIsInGame(false)
@@ -17,7 +30,7 @@ function App() {
   return (
     <div className='App'>
       {isInGame ?
-        <Memorize difficulty={difficulty} handleBack={() => handleBack()}/>
+        <Memorize difficulty={difficulty} images={images} handleBack={() => handleBack()}/>
         :
         <div className='container mx-auto bg-cover'>
           <div className='grid grid-rows-5'>
